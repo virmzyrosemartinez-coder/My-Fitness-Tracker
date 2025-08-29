@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness & Meal Plan Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+        }
+        @media print {
+            body {
+                background-color: #fff;
+                color: #000;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+    <div class="container mx-auto p-4 md:p-8 max-w-6xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Your 14-Day Fitness & Nutrition Plan</h1>
+            <p class="text-lg text-gray-600 mt-2">A comprehensive guide for glute and core strength, with a focus on American & Filipino diet.</p>
+        </header>
+        <div class="no-print flex justify-center mb-8">
+            <button onclick="window.print()" class="bg-purple-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                Download as PDF
+            </button>
+        </div>
+
+        <main>
+            <!-- Workout Section (Remains the same as before) -->
+            <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">🏋️ Workout Plan: Glutes & Core Focus</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Day 1/8 -->
+                    <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
+                        <img src="https://placehold.co/200x150/8B5CF6/ffffff?text=Glute+Day" alt="Glute Day" class="w-full h-auto mb-4 rounded-md">
+                        <h3 class="font-semibold text-lg">Days 1 & 8</h3>
+                        <p class="text-gray-700 mt-1">Glute & Leg Day</p>
+                        <p class="text-sm text-gray-600 mt-2">Hip Thrusts, Bulgarian Split Squats, Cable Pull-Throughs, RDLs.</p>
+                    </div>
+                    <!-- Day 2/9 -->
+                    <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
+                        <img src="https://placehold.co/200x150/6366F1/ffffff?text=Core+Day" alt="Core Day" class="w-full h-auto mb-4 rounded-md">
+                        <h3 class="font-semibold text-lg">Days 2 & 9</h3>
+                        <p class="text-gray-700 mt-1">Core & Upper Body</p>
+                        <p class="text-sm text-gray-600 mt-2">Plank, Hanging Leg Raises, Dumbbell Rows, Overhead Press.</p>
+                    </div>
+                    <!-- Day 3/10 -->
+                    <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
+                        <img src="https://placehold.co/200x150/A78BFA/ffffff?text=Rest+Day" alt="Rest Day" class="w-full h-auto mb-4 rounded-md">
+                        <h3 class="font-semibold text-lg">Days 3 & 10</h3>
+                        <p class="text-gray-700 mt-1">Active Recovery</p>
+                        <p class="text-sm text-gray-600 mt-2">Take a brisk walk or do light stretching to aid muscle recovery.</p>
+                    </div>
+                    <!-- Day 4/11 -->
+                    <div class="bg-gray-100 p-4 rounded-lg flex flex-col items-center text-center">
+                        <img src="https://placehold.co/200x150/DDD6FE/ffffff?text=Full+Body" alt="Full Body Day" class="w-full h-auto mb-4 rounded-md">
+                        <h3 class="font-semibold text-lg">Day 7 & 14</h3>
+                        <p class="text-gray-700 mt-1">Full Body & Cardio</p>
+                        <p class="text-sm text-gray-600 mt-2">Compound lifts (squats, push-ups, lunges) & 20-30 min HIIT.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Meal Plan Section (Removed details, now just the recipe generator) -->
+            <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">✨ Meal Recipe Generator</h2>
+                <p class="text-gray-600 mb-4">Get detailed recipes for your meals!</p>
+                <div class="flex flex-col md:flex-row md:items-center gap-4 mb-4">
+                    <input type="text" id="recipeInput" placeholder="Enter a meal name, e.g., 'Chicken Adobo'" class="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button id="generateRecipeBtn" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        Get Recipe ✨
+                    </button>
+                </div>
+                <div id="recipeResult" class="bg-gray-100 p-4 rounded-lg hidden">
+                    <div id="recipeLoading" class="text-center text-purple-600 hidden">Generating...</div>
+                    <div id="recipeContent"></div>
+                </div>
+            </section>
+
+            <!-- UPDATED: Progressive Overload Tracker -->
+            <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">💪 Progressive Weights Tracker</h2>
+                <p class="text-gray-600 mb-4">Log your workout details by day to track your strength gains over time.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label for="workoutDateInput" class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="workoutDateInput" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="workoutDaySelect" class="block text-sm font-medium text-gray-700">Workout Day</label>
+                        <select id="workoutDaySelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                            <option value="">Select a Workout Day</option>
+                            <option value="1">Day 1 & 8: Glute & Leg Day</option>
+                            <option value="2">Day 2 & 9: Core & Upper Body</option>
+                            <option value="3">Day 3 & 10: Active Recovery</option>
+                            <option value="4">Day 4 & 11: Glute & Leg Day 2</option>
+                            <option value="5">Day 5 & 12: Core & Upper Body 2</option>
+                            <option value="6">Day 6 & 13: Rest Day</option>
+                            <option value="7">Day 7 & 14: Full Body & Cardio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="exerciseInputs" class="mt-4 space-y-4">
+                    <!-- Exercise inputs will be dynamically generated here -->
+                </div>
+
+                <button id="saveWorkoutBtn" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 w-full mt-6">
+                    Save Workout
+                </button>
+                <div id="workoutMessage" class="mt-2 text-sm text-center"></div>
+
+                <div id="workoutTableContainer" class="mt-8 overflow-x-auto">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">My Workout Log</h3>
+                    <table class="min-w-full bg-white rounded-lg shadow-sm overflow-hidden">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Day</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Exercise</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Weight (kg)</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Sets & Reps</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="workoutTableBody" class="divide-y divide-gray-200">
+                            <!-- Workout data will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Personal Tracker Section (Remains the same) -->
+            <section class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">📈 My Progress Tracker</h2>
+                <p class="text-gray-600 mb-4">Log your progress to stay accountable and visualize your journey!</p>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                        <label for="dateInput" class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="dateInput" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="weightInput" class="block text-sm font-medium text-gray-700">Weight (kg)</label>
+                        <input type="number" id="weightInput" placeholder="e.g., 75" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="bodyFatInput" class="block text-sm font-medium text-gray-700">Body Fat (%)</label>
+                        <input type="number" id="bodyFatInput" placeholder="e.g., 18.5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="waistInput" class="block text-sm font-medium text-gray-700">Waist (in)</label>
+                        <input type="number" id="waistInput" placeholder="e.g., 33" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                    </div>
+                </div>
+                <button id="saveProgressBtn" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 w-full">
+                    Save Progress
+                </button>
+                <div id="trackerMessage" class="mt-2 text-sm text-center"></div>
+
+                <div id="trackerTableContainer" class="mt-8 overflow-x-auto">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">My Progress Log</h3>
+                    <table class="min-w-full bg-white rounded-lg shadow-sm overflow-hidden">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Date</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Weight (kg)</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Body Fat (%)</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600">Waist (in)</th>
+                                <th class="py-2 px-4 text-left text-sm font-medium text-gray-600"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="progressTableBody" class="divide-y divide-gray-200">
+                            <!-- Progress data will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12">
+            <p class="text-gray-600">You've got this! Stay consistent, listen to your body, and enjoy the journey.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Gemini API logic for recipes
+        const apiKey = "";
+        const recipeInput = document.getElementById('recipeInput');
+        const generateRecipeBtn = document.getElementById('generateRecipeBtn');
+        const recipeResult = document.getElementById('recipeResult');
+        const recipeLoading = document.getElementById('recipeLoading');
+        const recipeContent = document.getElementById('recipeContent');
+
+        generateRecipeBtn.addEventListener('click', generateRecipe);
+
+        async function generateRecipe() {
+            const mealName = recipeInput.value.trim();
+            if (!mealName) return;
+
+            recipeResult.classList.remove('hidden');
+            recipeLoading.classList.remove('hidden');
+            recipeContent.innerHTML = '';
+
+            try {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const prompt = `Generate a detailed recipe for a healthy "${mealName}" in a JSON format. Include the recipeName, ingredients (as an array of strings), instructions (as a single string with numbered steps), and a brief nutritionalInfo (as a single string). Ensure the ingredients and instructions are clear for an American/Filipino diet.`;
+                const payload = {
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
+                    }],
+                    generationConfig: {
+                        responseMimeType: "application/json",
+                        responseSchema: {
+                            type: "OBJECT",
+                            properties: {
+                                "recipeName": {
+                                    "type": "STRING"
+                                },
+                                "ingredients": {
+                                    "type": "ARRAY",
+                                    "items": {
+                                        "type": "STRING"
+                                    }
+                                },
+                                "instructions": {
+                                    "type": "STRING"
+                                },
+                                "nutritionalInfo": {
+                                    "type": "STRING"
+                                }
+                            }
+                        }
+                    }
+                };
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (jsonText) {
+                    const recipe = JSON.parse(jsonText);
+                    displayRecipe(recipe);
+                } else {
+                    recipeContent.innerHTML = '<p class="text-red-500">Failed to generate recipe. Please try again.</p>';
+                }
+            } catch (error) {
+                console.error('Error generating recipe:', error);
+                recipeContent.innerHTML = `<p class="text-red-500">An error occurred: ${error.message}</p>`;
+            } finally {
+                recipeLoading.classList.add('hidden');
+            }
+        }
+
+        function displayRecipe(recipe) {
+            let html = `
+                <h3 class="text-xl font-semibold mb-2">${recipe.recipeName}</h3>
+                <h4 class="font-bold mt-4 mb-2">Ingredients</h4>
+                <ul class="list-disc list-inside">
+                    ${recipe.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+                <h4 class="font-bold mt-4 mb-2">Instructions</h4>
+                <p class="whitespace-pre-line">${recipe.instructions}</p>
+                <h4 class="font-bold mt-4 mb-2">Nutritional Info</h4>
+                <p>${recipe.nutritionalInfo}</p>
+            `;
+            recipeContent.innerHTML = html;
+        }
+
+        // JavaScript for the Personal Progress Tracker (remains the same)
+        const dateInput = document.getElementById('dateInput');
+        const weightInput = document.getElementById('weightInput');
+        const bodyFatInput = document.getElementById('bodyFatInput');
+        const waistInput = document.getElementById('waistInput');
+        const saveProgressBtn = document.getElementById('saveProgressBtn');
+        const progressTableBody = document.getElementById('progressTableBody');
+        const trackerMessage = document.getElementById('trackerMessage');
+
+        // Set the default date to today's date
+        dateInput.valueAsDate = new Date();
+
+        // Event listener for the save button
+        saveProgressBtn.addEventListener('click', saveProgress);
+
+        function saveProgress() {
+            const date = dateInput.value;
+            const weight = parseFloat(weightInput.value);
+            const bodyFat = parseFloat(bodyFatInput.value);
+            const waist = parseFloat(waistInput.value);
+
+            // Basic validation
+            if (!date || isNaN(weight) || isNaN(bodyFat) || isNaN(waist)) {
+                showMessage('Please fill in all fields with valid numbers.', 'text-red-500');
+                return;
+            }
+
+            // Get existing data from local storage
+            let progressData = JSON.parse(localStorage.getItem('fitnessProgress')) || [];
+
+            // Find if an entry for the same date already exists
+            const existingEntryIndex = progressData.findIndex(entry => entry.date === date);
+
+            const newEntry = { date, weight, bodyFat, waist };
+
+            if (existingEntryIndex > -1) {
+                // Update existing entry
+                progressData[existingEntryIndex] = newEntry;
+                showMessage('Progress updated for this date!', 'text-green-500');
+            } else {
+                // Add new entry
+                progressData.push(newEntry);
+                showMessage('Progress saved successfully!', 'text-green-500');
+            }
+
+            // Sort data by date
+            progressData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            // Save the updated data back to local storage
+            localStorage.setItem('fitnessProgress', JSON.stringify(progressData));
+
+            // Clear inputs for next entry
+            weightInput.value = '';
+            bodyFatInput.value = '';
+            waistInput.value = '';
+            dateInput.valueAsDate = new Date();
+
+            // Re-render the table
+            renderProgressTable();
+        }
+
+        function showMessage(message, colorClass) {
+            trackerMessage.textContent = message;
+            trackerMessage.className = `mt-2 text-sm text-center ${colorClass}`;
+            setTimeout(() => {
+                trackerMessage.textContent = '';
+                trackerMessage.className = 'mt-2 text-sm text-center';
+            }, 3000); // Clear message after 3 seconds
+        }
+
+        function renderProgressTable() {
+            // Clear the current table body
+            progressTableBody.innerHTML = '';
+
+            // Get data from local storage
+            const progressData = JSON.parse(localStorage.getItem('fitnessProgress')) || [];
+
+            if (progressData.length === 0) {
+                progressTableBody.innerHTML = '<tr><td colspan="5" class="py-4 text-center text-gray-500">No progress logged yet.</td></tr>';
+                return;
+            }
+
+            // Create a row for each entry
+            progressData.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.date}</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.weight} kg</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.bodyFat} %</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.waist} in</td>
+                    <td class="py-2 px-4 text-sm text-right">
+                        <button onclick="deleteProgress(${index})" class="text-red-500 hover:text-red-700 focus:outline-none">Delete</button>
+                    </td>
+                `;
+                progressTableBody.appendChild(row);
+            });
+        }
+
+        function deleteProgress(index) {
+            let progressData = JSON.parse(localStorage.getItem('fitnessProgress')) || [];
+            progressData.splice(index, 1);
+            localStorage.setItem('fitnessProgress', JSON.stringify(progressData));
+            renderProgressTable();
+            showMessage('Entry deleted successfully.', 'text-green-500');
+        }
+
+        // NEW JavaScript for the Progressive Weights Tracker
+        const workoutDateInput = document.getElementById('workoutDateInput');
+        const workoutDaySelect = document.getElementById('workoutDaySelect');
+        const exerciseInputsContainer = document.getElementById('exerciseInputs');
+        const saveWorkoutBtn = document.getElementById('saveWorkoutBtn');
+        const workoutTableBody = document.getElementById('workoutTableBody');
+        const workoutMessage = document.getElementById('workoutMessage');
+
+        // Define the workout plan with exercises
+        const workoutPlan = {
+            '1': ['Hip Thrusts', 'Bulgarian Split Squats', 'Cable Pull-Throughs', 'RDLs'],
+            '2': ['Plank', 'Hanging Leg Raises', 'Dumbbell Rows', 'Overhead Press'],
+            '3': ['Active Recovery (No Lifts)'],
+            '4': ['Sumo Squats', 'Leg Press', 'Good Mornings', 'Calf Raises'],
+            '5': ['Russian Twists', 'Dumbbell Crunches', 'Push-ups', 'Pull-ups'],
+            '6': ['Rest Day (No Lifts)'],
+            '7': ['Squats', 'Push-ups', 'Lunges', 'HIIT Cardio'],
+        };
+
+        // Set the default date to August 28, 2025
+        workoutDateInput.value = '2025-08-28';
+
+        workoutDaySelect.addEventListener('change', renderExerciseInputs);
+        saveWorkoutBtn.addEventListener('click', saveWorkout);
+
+        function renderExerciseInputs() {
+            exerciseInputsContainer.innerHTML = '';
+            const selectedDay = workoutDaySelect.value;
+            if (!selectedDay) return;
+
+            const exercises = workoutPlan[selectedDay];
+            if (exercises[0].includes('Recovery') || exercises[0].includes('Rest')) {
+                exerciseInputsContainer.innerHTML = `<p class="text-gray-600">No specific weights to track for this day. Focus on active recovery.</p>`;
+                return;
+            }
+
+            exercises.forEach((exercise, index) => {
+                const exerciseDiv = document.createElement('div');
+                exerciseDiv.className = 'p-4 border border-gray-200 rounded-lg bg-gray-50';
+                exerciseDiv.innerHTML = `
+                    <h4 class="font-semibold text-gray-800 mb-2">${exercise}</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="weight-${index}" class="block text-sm font-medium text-gray-700">Weight (kg)</label>
+                            <input type="number" id="weight-${index}" placeholder="e.g., 60" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                        </div>
+                        <div>
+                            <label for="setsreps-${index}" class="block text-sm font-medium text-gray-700">Sets & Reps</label>
+                            <input type="text" id="setsreps-${index}" placeholder="e.g., 3x12" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500">
+                        </div>
+                    </div>
+                `;
+                exerciseInputsContainer.appendChild(exerciseDiv);
+            });
+        }
+
+        function saveWorkout() {
+            const date = workoutDateInput.value;
+            const day = workoutDaySelect.value;
+            if (!date || !day) {
+                showWorkoutMessage('Please select a date and workout day.', 'text-red-500');
+                return;
+            }
+
+            if (workoutPlan[day][0].includes('Recovery') || workoutPlan[day][0].includes('Rest')) {
+                showWorkoutMessage('Nothing to save for Rest/Recovery Day.', 'text-yellow-500');
+                return;
+            }
+
+            let workoutData = JSON.parse(localStorage.getItem('workoutProgress')) || [];
+            const exercises = workoutPlan[day];
+
+            const newEntries = exercises.map((exercise, index) => {
+                const weight = document.getElementById(`weight-${index}`).value;
+                const setsReps = document.getElementById(`setsreps-${index}`).value;
+                return { date, day, exercise, weight: parseFloat(weight) || 0, setsReps };
+            });
+
+            // Add new entries and sort
+            workoutData.push(...newEntries);
+            workoutData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            localStorage.setItem('workoutProgress', JSON.stringify(workoutData));
+
+            // Clear inputs and re-render
+            workoutDaySelect.value = '';
+            exerciseInputsContainer.innerHTML = '';
+            renderWorkoutTable();
+            showWorkoutMessage('Workout saved successfully!', 'text-green-500');
+        }
+
+        function showWorkoutMessage(message, colorClass) {
+            workoutMessage.textContent = message;
+            workoutMessage.className = `mt-2 text-sm text-center ${colorClass}`;
+            setTimeout(() => {
+                workoutMessage.textContent = '';
+                workoutMessage.className = 'mt-2 text-sm text-center';
+            }, 3000);
+        }
+
+        function renderWorkoutTable() {
+            workoutTableBody.innerHTML = '';
+            const workoutData = JSON.parse(localStorage.getItem('workoutProgress')) || [];
+
+            if (workoutData.length === 0) {
+                workoutTableBody.innerHTML = '<tr><td colspan="6" class="py-4 text-center text-gray-500">No workout logged yet.</td></tr>';
+                return;
+            }
+
+            workoutData.forEach((entry, index) => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = `
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.date}</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.day}</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.exercise}</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.weight} kg</td>
+                    <td class="py-2 px-4 text-sm text-gray-800">${entry.setsReps}</td>
+                    <td class="py-2 px-4 text-sm text-right">
+                        <button onclick="deleteWorkout(${index})" class="text-red-500 hover:text-red-700 focus:outline-none">Delete</button>
+                    </td>
+                `;
+                workoutTableBody.appendChild(row);
+            });
+        }
+
+        function deleteWorkout(index) {
+            let workoutData = JSON.parse(localStorage.getItem('workoutProgress')) || [];
+            workoutData.splice(index, 1);
+            localStorage.setItem('workoutProgress', JSON.stringify(workoutData));
+            renderWorkoutTable();
+            showWorkoutMessage('Workout entry deleted successfully.', 'text-green-500');
+        }
+
+        // Load all data when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProgressTable();
+            renderWorkoutTable();
+        });
+    </script>
+</body>
+</html>
